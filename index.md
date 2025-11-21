@@ -3,11 +3,14 @@ layout: default
 title: Home Lab & SRE Portfolio
 ---
 
-# <名前> – SRE / インフラエンジニア志望  
+# <名前> – SRE / インフラエンジニア志望
 
 <アルファベット名>  
 （2025 求職中・フレックス/ハイブリッド希望）
-療養期間中に技術スキルの維持と向上、そして実用目的のために**3ノード Proxmox VE クラスタを中核としたプライベートクラウド環境**を構築し、OS / ネットワーク / ストレージ / セキュリティ / 監視 / 自動化 を横断的に学習・運用してきました。
+
+療養期間中に技術スキルの維持と向上、そして実用目的のために  
+**3ノード Proxmox VE クラスタを中核としたプライベートクラウド環境**を構築し、  
+OS / ネットワーク / ストレージ / セキュリティ / 監視 / 自動化 を横断的に学習・運用してきました。
 
 ---
 
@@ -35,17 +38,17 @@ title: Home Lab & SRE Portfolio
 - WireGuard / DNS over TLS（Quad9）
 
 ### ストレージ
-- TrueNAS SCALE（25.04）
+- TrueNAS SCALE（25.04）  
 - ZFS（ミラー構成）  
 - NFS / レプリケーション / Scrub / SMART監視
 
 ### セキュリティ / TLS
-- Step-CA（ACME運用）
-- Caddy（Reverse Proxy + DNS-01）
+- Step-CA（ACME運用）  
+- Caddy（Reverse Proxy + DNS-01）  
 - Cloudflare DNS管理
 
 ### 自動化 / IaC
-- Ansible（Docker / VMプロビジョニング）
+- Ansible（Docker / VMプロビジョニング）  
 - Cloud-init  
 - Git / Forgejo
 
@@ -58,7 +61,8 @@ title: Home Lab & SRE Portfolio
 
 # 🏗️ Home Lab 概要（3ノード Proxmox クラスタ）
 
-療養期間の学習基盤として、**小規模ながら商用レベルに近いプライベートクラウド環境**を構築しました。
+療養期間の学習基盤として、  
+**小規模ながら商用レベルに近いプライベートクラウド環境**を構築しました。
 
 ```
 ┌──────────────────────────────────────┐
@@ -72,7 +76,9 @@ title: Home Lab & SRE Portfolio
 └──────────────────────────────────────┘
 ```
 
+
 ### ノード構成（例）
+
 - ノードA：Ryzen 9 3900X / 48GB RAM  
 - ノードB：Ryzen 7 3700X / 64GB RAM  
 - ノードC：Core i5-10400 / 32GB RAM  
@@ -83,14 +89,16 @@ title: Home Lab & SRE Portfolio
 # 🌐 ネットワーク構成（VXLAN + OPNsense HA）
 
 ### セグメント
-- manage: `10.0.10.0/24`
-- remote: `10.0.11.0/24`
-- nas: `10.0.20.0/24`
-- service: `10.0.30.0/24`
-- family: `10.0.40.0/24`
+
+- manage: `10.0.10.0/24`  
+- remote: `10.0.11.0/24`  
+- nas: `10.0.20.0/24`  
+- service: `10.0.30.0/24`  
+- family: `10.0.40.0/24`  
 - public: `10.0.50.0/24`
 
 ### ルータ（OPNsense HA）
+
 - CARP + pfSync による冗長構成  
 - ゾーンベースの**ゼロトラスト設計**  
 - DNS上書きは Unbound に集約  
@@ -101,11 +109,13 @@ title: Home Lab & SRE Portfolio
 # 💽 ストレージ構成（TrueNAS）
 
 ### メインNAS
-- TrueNAS SCALE 25.04（VM）
+
+- TrueNAS SCALE 25.04（VM）  
 - ZFS（4TB ×2 のミラー）  
 - Nextcloud / Immich / Proxmox Backup をDataset単位で分離
 
 ### サブNAS（バックアップ）
+
 - 別ノード上の TrueNAS VM  
 - ZFSレプリケーションで差分同期  
 - daily / weekly / monthly の世代管理
@@ -127,32 +137,37 @@ title: Home Lab & SRE Portfolio
 
 # 🔥 障害対応・トラブルシューティング例
 
-### 1. Proxmox ノードが正常にシャットダウンできない  
+### 1. Proxmox ノードが正常にシャットダウンできない
+
 **原因**：IOMMU設定とBIOS仕様の相互作用  
 **対策**：  
 - kernel command line 調整  
 - BIOS設定再構成  
 → **安定した停止処理を実現**
 
-### 2. Proxmox → TrueNAS（NFS）バックアップの不整合  
+### 2. Proxmox → TrueNAS（NFS）バックアップの不整合
+
 **原因**：コンテナのストレージ移動時にコンテナ設定が破損  
 **対策**：コンテナ設定の整合性修正
 
-### 3. OPNsense ACME が正常動作しない  
-**原因**：HTTP-01 チャレンジ経路が制限され、OPNsenseのACMEプラグインで再現性が取れなかった 
-**対策**：
-- Step-CA の内部CAを使用し、証明書の有効期間を長めに設定
-- 証明書更新は手動運用へ切り替え（3ヶ月）  
-→ 信頼性重視の運用方針に切り替えて安定化
+### 3. OPNsense ACME が正常動作しない
 
-### 4. Immich のDockerが高メモリ使用  
+**原因**：HTTP-01 経路問題とプラグイン仕様  
+**対策**：  
+- Step-CA の内部CAで証明書管理  
+- 有効期間は長期化し手動更新（3ヶ月）  
+→ 信頼性優先の運用に切り替え
+
+### 4. Immich のDockerが高メモリ使用
+
 **原因**：キャッシュ挙動  
-**対策**：Pulseで監視 → しきい値調整し安定化
+**対策**：Pulseで監視し、しきい値調整で安定化
 
-### 5. ImmichのAndroidアプリからサーバーへアクセスできない
-**原因**：Androidアプリ側がユーザー追加CAを信頼しない仕様  
-**対策**：公式CA（Let’s Encrypt）へ切り替え  
-→ **アプリ互換性とセキュリティの両立を達成**
+### 5. Immich Androidアプリが内部CAを信頼しない
+
+**原因**：Android側の仕様で追加CAを信頼不可  
+**対策**：Let's Encryptへ切り替え  
+→ **アプリ互換性とセキュリティを両立**
 
 ---
 
@@ -161,6 +176,7 @@ title: Home Lab & SRE Portfolio
 現在、自宅環境のコード化を進めています。
 
 ### Playbook例（公開予定）
+
 - Ubuntu 初期セットアップ  
 - Docker CE インストール  
 - Immich 自動デプロイ  
@@ -174,18 +190,19 @@ title: Home Lab & SRE Portfolio
 
 ### ✔ SRE（インフラ寄り）
 - 監視 / SLO / 自動化  
-- Kubernetes / Loki / Grafana など
+- Kubernetes / Loki / Grafana 等
 
 ### ✔ クラウドインフラ
-- AWS 等でのPoC  
-- Terraform による IaC  
+- AWS でのPoC  
+- Terraform による IaC
 
 ### ✔ バックエンド
-- Go / TypeScriptで軽量API作成  
+- Go / TypeScript で軽量API作成  
 - Docker化 & Caddy公開
 
 ---
 
 # 📬 連絡先
+
 - GitHub: https://github.com/<your-username>  
-- （任意）メール：<your-email>  
+- （任意）メール：<your-email>
