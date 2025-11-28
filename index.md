@@ -174,15 +174,16 @@ OS / ネットワーク / ストレージ / セキュリティ / 監視 / 自動
 # ⚙️ 自動化（Ansible）
 
 現在、自宅環境のコード化を進めています。
+Cloud-initでVMを作成し、AnsibleでVM内の設定を自動化しています。
 
-### Playbook例（公開予定）
+### Playbook例
 
 - Ubuntu 初期セットアップ  
 - Docker CE インストール  
 - Immich 自動デプロイ  
 - NFS マウント管理
 
-➡️ `ansible-home-lab` として公開予定
+➡️ https://github.com/yusuke-524/ansible-immich
 
 ---
 
