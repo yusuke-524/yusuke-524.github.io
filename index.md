@@ -3,9 +3,9 @@ layout: default
 title: Home Lab & SRE Portfolio
 ---
 
-# 名前 – SRE / インフラエンジニア志望
+# 中村雄介 – SRE / インフラエンジニア志望
 
-アルファベット名  
+Yusuke Nakamura  
 （2025 求職中・フレックス/ハイブリッド希望）
 
 療養期間中に技術スキルの維持と向上、そして実用目的のために  
@@ -20,7 +20,7 @@ OS / ネットワーク / ストレージ / セキュリティ / 監視 / 自動
 - 学歴：電気系修士（2024年修了）  
 - 元職種：車載空調制御（制御設計職）  
 - 志望：**SRE / インフラ / バックエンドの3軸で応募中**  
-- 働き方：**ハイブリッド勤務・フレックス希望**（睡眠相後退症候群の医師診断による）
+- 働き方：**ハイブリッド/リモート勤務・フレックス希望**（睡眠相後退症候群の医師診断による）
 
 ---
 
@@ -48,11 +48,11 @@ OS / ネットワーク / ストレージ / セキュリティ / 監視 / 自動
 - Cloudflare DNS管理
 
 ### 自動化 / IaC
-- Ansible（Docker / VMプロビジョニング）  
+- Ansible（Docker / VMプロビジョニング）学習中  
 - Cloud-init  
 - Git / Forgejo
 
-### 開発
+### 開発経験（趣味 / 大学院での研究用）
 - C#: GUI（Forms, Avalonia）/ CLI  
 - TypeScript / Node.js（Discord Bot / API）  
 - MariaDB
@@ -118,7 +118,7 @@ OS / ネットワーク / ストレージ / セキュリティ / 監視 / 自動
 
 - 別ノード上の TrueNAS VM  
 - ZFSレプリケーションで差分同期  
-- daily / weekly / monthly の世代管理
+- 日次、週次、月次の世代管理
 
 ---
 
@@ -150,23 +150,15 @@ OS / ネットワーク / ストレージ / セキュリティ / 監視 / 自動
 **原因**：コンテナのストレージ移動時にコンテナ設定が破損  
 **対策**：コンテナ設定の整合性修正
 
-### 3. OPNsense ACME が正常動作しない
+### 3. Immich のDockerが高メモリ使用
 
-**原因**：HTTP-01 経路問題とプラグイン仕様  
-**対策**：  
-- Step-CA の内部CAで証明書管理  
-- 有効期間は長期化し手動更新（3ヶ月）  
-→ 信頼性優先の運用に切り替え
-
-### 4. Immich のDockerが高メモリ使用
-
-**原因**：キャッシュ挙動  
+**原因**：Dockerのキャッシュ挙動  
 **対策**：Pulseで監視し、しきい値調整で安定化
 
-### 5. Immich Androidアプリが内部CAを信頼しない
+### 4. Immich Androidアプリが内部CAを信頼しない
 
-**原因**：Android側の仕様で追加CAを信頼不可  
-**対策**：Let's Encryptへ切り替え  
+**原因**：Androidアプリ側の仕様で追加CAを信頼不可  
+**対策**：Caddy側の証明書をLet's Encryptへ切り替え  
 → **アプリ互換性とセキュリティを両立**
 
 ---
@@ -190,7 +182,7 @@ Cloud-initでVMを作成し、AnsibleでVM内の設定を自動化していま�
 # 🚀 今後の学習・キャリア方向（固定していません）
 
 ### ✔ SRE（インフラ寄り）
-- 監視 / SLO / 自動化  
+- 監視 / 自動化  
 - Kubernetes / Loki / Grafana 等
 
 ### ✔ クラウドインフラ
@@ -205,5 +197,5 @@ Cloud-initでVMを作成し、AnsibleでVM内の設定を自動化していま�
 
 # 📬 連絡先
 
-- GitHub: https://github.com/<your-username>  
-- （任意）メール：<your-email>
+- GitHub: [https://github.com/<your-username>](https://github.com/yusuke-524)  
+- mithukyo.fromy.na@gmail.com
