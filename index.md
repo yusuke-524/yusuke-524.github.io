@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Home Lab & SRE Portfolio
+title: 自宅サーバーポートフォリオ
 ---
 
 # 中村雄介 – SRE / インフラエンジニア志望
@@ -139,10 +139,10 @@ OS / ネットワーク / ストレージ / セキュリティ / 監視 / 自動
 
 ### 1. Proxmox ノードが正常にシャットダウンできない
 
-**原因**：IOMMU設定とBIOS仕様の相互作用  
+**原因**：IOMMU設定とBIOS不具合の相互作用  
 **対策**：  
 - kernel command line 調整  
-- BIOS設定再構成  
+- 不具合に対応したBIOS設定再構成  
 → **安定した停止処理を実現**
 
 ### 2. Proxmox → TrueNAS（NFS）バックアップの不整合
@@ -175,7 +175,7 @@ Cloud-initでVMを作成し、AnsibleでVM内の設定を自動化していま�
 - Immich 自動デプロイ  
 - NFS マウント管理
 
-➡️ https://github.com/yusuke-524/ansible-immich
+➡️ <https://github.com/yusuke-524/ansible-immich>
 
 ---
 
@@ -197,5 +197,5 @@ Cloud-initでVMを作成し、AnsibleでVM内の設定を自動化していま�
 
 # 📬 連絡先
 
-- GitHub: [https://github.com/<your-username>](https://github.com/yusuke-524)  
+- GitHub: <https://github.com/yusuke-524>  
 - mithukyo.fromy.na@gmail.com
