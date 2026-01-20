@@ -68,14 +68,72 @@
       padding: 2rem;
       border-radius: 8px;
       box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-      color: #24292f;
+      color: #333333;
     }
     .markdown-body * {
       color: inherit;
     }
+    .markdown-body h1,
+    .markdown-body h2,
+    .markdown-body h3,
+    .markdown-body h4,
+    .markdown-body h5,
+    .markdown-body h6 {
+      color: #333333;
+    }
+    .markdown-body a {
+      color: #333333;
+      text-decoration: underline;
+      text-underline-offset: 0.15em;
+    }
+    .markdown-body a:hover {
+      color: #333333;
+      text-decoration-thickness: 0.14em;
+    }
+    .markdown-body code {
+      background: #f5f5f5;
+      color: #333333;
+      padding: 0.1em 0.3em;
+      border-radius: 4px;
+      border: 1px solid #e6e6e6;
+    }
+    .markdown-body pre,
+    .markdown-body .highlight,
+    .markdown-body pre code {
+      background: #f5f5f5;
+      color: #333333;
+      border: 1px solid #e6e6e6;
+    }
+    .markdown-body pre {
+      padding: 1em;
+      overflow: auto;
+    }
+    .markdown-body pre code {
+      padding: 0;
+      border: none;
+      background: transparent;
+    }
     .markdown-body table {
       display: table;
       width: 100%;
+    }
+    .markdown-body table {
+      border-collapse: collapse;
+      border-spacing: 0;
+      background: #fff;
+    }
+    .markdown-body th,
+    .markdown-body td {
+      border: 1px solid #e3e7e5;
+      padding: 0.6em 0.8em;
+      color: #333333;
+    }
+    .markdown-body thead th {
+      background: #ffffff;
+      font-weight: 600;
+    }
+    .markdown-body tbody tr:nth-child(2n) {
+      background: #e7f1ea;
     }
     @media (max-width: 600px) {
       .page-header h1 { font-size: 1.5rem; }
