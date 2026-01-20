@@ -1,0 +1,8 @@
+- name: トップ
+  url: /
+- name: インフラ構成
+  url: /details/infrastructure.html
+- name: 運用・監視
+  url: /details/operations.html
+- name: サービス詳細
+  url: /details/services.html
