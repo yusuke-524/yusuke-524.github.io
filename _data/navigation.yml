@@ -6,3 +6,5 @@
   url: /details/operations.html
 - name: サービス詳細
   url: /details/services.html
+- name: 開発プロジェクト
+  url: /details/yomicord.html
