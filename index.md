@@ -1,6 +1,6 @@
 ---
 layout: default
-title: 自宅サーバーポートフォリオ
+title: 中村雄介 | インフラ/バックエンドエンジニア ポートフォリオ
 ---
 
 # 中村雄介
@@ -8,7 +8,7 @@ title: 自宅サーバーポートフォリオ
 Yusuke Nakamura  
 （2026年 求職中・フレックス/ハイブリッド希望）
 
-療養期間中に技術スキルの維持と向上、そして実用目的のために  
+技術スキルの維持と向上、そして実用目的のために  
 **3ノード Proxmox VE クラスタを中核としたプライベートクラウド環境**を構築し、  
 OS / ネットワーク / ストレージ / セキュリティ / 監視 / 自動化 を横断的に学習・運用してきました。
 
@@ -23,57 +23,46 @@ OS / ネットワーク / ストレージ / セキュリティ / 監視 / 自動
 
 ---
 
-# 🧠 保有スキル（概要）
+# 🧠 主要スキル
 
-### インフラ・仮想化
-- Proxmox VE 8.x（クラスタ / HA / GPU Passthrough / IOMMU）
-- KVM / LXC / QEMU  
-- Linux（Ubuntu / Debian）3年以上の自宅サーバー運用経験
+### バックエンド（主軸）
+- TypeScript / Node.js、Fastify（API実装）
+- REST API設計（認可 / 検証 / 監査ログ）
+- zod（contracts / 実行時バリデーション）
+- vitest（テスト）
+- monorepo（pnpm workspace）、ADRによる意思決定文書化
 
-### バックエンド開発
-- TypeScript / Node.js（REST API設計・実装）
-- REST API設計（認可・検証・監査ログ）
-- アーキテクチャ設計（責務分離・拡張性考慮）
-- ADR（Architecture Decision Records）による意思決定文書化
-- monorepo構成（pnpm workspace）
-- zod による型安全性確保
-- テスト駆動開発（vitest）
-- 制御されたAI活用（GitHub Copilot / OpenAI Codex + ガードレール）
+### インフラ（運用経験）
+- Proxmox VE 8.x（3ノード/クラスタ）、KVM / LXC
+- OPNsense HA（CARP + pfSync）、VXLAN（Proxmox SDN）
+- TrueNAS SCALE + ZFS（ミラー / レプリケーション / NFS）
+- Caddy / Step-CA（証明書自動更新）、Discord Webhook 監視通知
+- Ansible / Cloud-init（VM自動構築）
 
-### ネットワーク
-- OPNsense 25.7（CARP + pfSync による HA構成）
-- Proxmox SDN / VXLAN（6セグメント構成）
-- DNS（Unbound）/ DHCP（Dnsmasq）  
-- WireGuard VPN / DNS over TLS（Quad9）
-- ゾーンベースファイアウォール設計
+---
 
-### ストレージ
-- TrueNAS SCALE 25.04  
-- ZFS（ミラー構成 / Scrub / SMART監視）  
-- NFS 共有設定・マウント管理
-- ZFS レプリケーション（日次/週次/月次の世代管理）
+# 💻 開発プロジェクト：Yomicord
 
-### セキュリティ / TLS
-- Step-CA（プライベート認証局 / ACME運用）  
-- Caddy（Reverse Proxy / DNS-01チャレンジ / Let's Encrypt）  
-- Cloudflare DNS / API連携
+技術学習として、**Discord音声読み上げBot**を設計・開発中。  
+インフラ運用で培った「運用を見据えた設計」をアプリケーション開発に応用しています。
 
-### 自動化 / IaC
-- Ansible（Docker / VM プロビジョニング実装済み）
-- Cloud-init（VM テンプレート自動構築）
-- Git / Forgejo（自宅Git環境）
+**技術スタック**: TypeScript, Node.js, Fastify, Zod, discord.js, pnpm, Vitest | **開発状況**: 設計・初期実装フェーズ
 
-### 開発経験（趣味 / 大学院研究用）
-- C#: GUI（Windows Forms / Avalonia UI）/ CLI  
-- TypeScript / Node.js（Discord Bot / REST API）  
-- MariaDB / CouchDB
+### 設計アプローチ
+
+**アーキテクチャ**: Single Writer パターン + Contracts First（Zod）、責務分離、ADR文書化  
+**AI活用**: GitHub Copilot/Codex を品質ガードレール下で運用（二層ルール・境界検証・差分管理）
+
+**2026年の差別化**: 「AIを使える」ではなく**「品質を保ちながら制御して使える」**
+
+➡️ GitHub リポジトリ: <https://github.com/Hakuya5247/yomicord>  
+➡️ プロジェクト詳細: [Yomicord開発プロジェクト](/details/yomicord.html)
 
 ---
 
 # 🏗️ Home Lab 概要（3ノード Proxmox クラスタ）
 
-療養期間の学習基盤として、  
-**小規模ながら商用レベルに近いプライベートクラウド環境**を構築しました。
+学習基盤として、**小規模ながら商用レベルに近いプライベートクラウド環境**を構築しました。
 
 **運用規模**
 - VM/CT数：19台
@@ -106,14 +95,9 @@ OS / ネットワーク / ストレージ / セキュリティ / 監視 / 自動
 
 # 📊 運用実績
 
-**構築・運用期間**
-- 構築開始：2025年9月
-- 現在の運用期間：4ヶ月
-- 最長連続稼働：60日以上（計画メンテナンスを除く）
-
-**安定性指標**
-- 計画メンテナンス：月1回程度
-- 自動復旧成功率：可能なサービスはHA構成により障害時も無停止運用を実現
+- **運用期間**: 4ヶ月（2025年9月〜）
+- **運用規模**: VM/CT 19台、VXLANセグメント 6つ、ZFSミラー 4TB × 2
+- **安定性**: 4ヶ月の集中運用の中で最長連続稼働60日以上、HA構成により障害時も無停止運用を実現
 
 ---
 
@@ -139,12 +123,7 @@ OS / ネットワーク / ストレージ / セキュリティ / 監視 / 自動
 
 # 💾 バックアップ・DR戦略
 
-**3層バックアップ構成**で堅牢なデータ保護を実現：
-
-1. **ZFS スナップショット** — 重要コンテナは15分〜2時間毎
-2. **Proxmox 標準バックアップ** — TrueNAS へ日次/週次/月次
-3. **TrueNAS ZFS レプリケーション** — 別ノードへ自動同期
-
+**3層バックアップ構成**：ZFSスナップショット（15分〜2時間毎）+ Proxmoxバックアップ（日次/週次/月次）+ ZFSレプリケーション  
 **災害復旧指標**：RPO 24時間以内 / RTO 2時間以内
 
 → [バックアップ・監視の詳細を見る](/details/operations.html)
@@ -153,138 +132,48 @@ OS / ネットワーク / ストレージ / セキュリティ / 監視 / 自動
 
 # 🔍 監視・運用体制
 
-- **Pulse**（Proxmox専用監視）によるクラスタ全体の可視化
-- **Discord Webhook** による即時アラート通知
-- サービス特性に応じた**カスタムしきい値**設定
-- 定期メンテナンス：ZFS Scrub（月1回）、SMART監視（週1回）
+**Pulse**（Proxmox専用監視）によるクラスタ全体の可視化、Discord Webhookによる即時アラート通知、定期メンテナンス（ZFS Scrub月1回、SMART監視週1回）
 
 ---
 
 # 🔒 セキュリティ対策
 
-- **ゼロトラストアーキテクチャ**：6セグメント完全分離、原則通信不可
-- **3層ファイアウォール**：OPNsense → Proxmox Datacenter → 各VM/CT
-- **TLS 1.3 / SSH公開鍵認証 / 2FA** による認証・暗号化
-- **Step-CA / Let's Encrypt** による証明書自動管理
+**ゼロトラストアーキテクチャ**（6セグメント完全分離）、**3層ファイアウォール**、**TLS 1.3 / SSH公開鍵認証 / 2FA**、**Step-CA / Let's Encrypt** による証明書自動管理
 
 → [セキュリティ詳細を見る](/details/operations.html)
 
 ---
 
-# 🔥 障害対応・トラブルシューティング例
+# 🔥 障害対応例
 
-### 1. Proxmox ノードが正常にシャットダウンできない
-
-**症状**：特定ノードで `shutdown` がハング、強制停止が必要になる  
-**原因**：IOMMU設定とBIOS不具合の相互作用でデバイス切離に失敗  
-**対策**：  
-- kernel command line で `amd_iommu=on iommu=pt` 設定  
-- BIOS設定の見直し（BIOS不具合による代替設定）  
-**結果**：安定した停止処理を実現、ノード再起動の信頼性向上
-
-### 2. Proxmox → TrueNAS（NFS）バックアップ失敗
-
-**症状**：特定コンテナのバックアップ時にハング、他のバックアップも影響を受ける  
-**原因**：コンテナのストレージ移動時に `.conf` ファイルが破損（`[vzdump]` セクション残存）  
-**対策**：設定ファイルの手動修正で `rootfs` 定義を正規化  
-**学び**：コンテナ設定の整合性確認の重要性、バックアップ前の検証手順確立
-
-### 3. Immich Docker が高メモリ使用でアラート
-
-**症状**：メモリ使用率95%超え、でPulseからのアラート発生  
-**原因**：Docker / snap のキャッシュ挙動によるメモリ消費  
-**対策**：Pulse 監視でしきい値を調整（実際のメモリ圧迫ではないと判断）   
-**学び**：メモリ使用率の表面的な数値だけでなく、実際の圧迫状況を見極める重要性
-
-### 4. Immich Android アプリが内部 CA を信頼しない
+### Immich Android アプリが内部 CA を信頼しない
 
 **症状**：Step-CA で発行した証明書を Android アプリが拒否  
 **原因**：Androidアプリ側の仕様で追加CAを信頼しない  
 **対策**：Caddy 側の証明書を **Let's Encrypt** へ切り替え（DNS-01チャレンジ / Cloudflare API連携）  
 **結果**：アプリ互換性とセキュリティを両立、外部からのアクセスも可能に
 
+→ [その他の障害対応例を見る](/details/operations.html)
+
 ---
 
 # 🎯 技術選定の理由
 
-| 技術              | 採用理由                                                                                    | 検討した代替案                     |
-| ----------------- | ------------------------------------------------------------------------------------------- | ---------------------------------- |
-| **Proxmox VE**    | ・KVM/LXC 両対応<br>・WebUI が充実<br>・クラスタ・HA機能が標準<br>・オープンソース          |                 |
-| **OPNsense**      | ・HA機能（CARP/pfSync）<br>・VXLAN 対応<br>・FreeBSD ベースの安定性<br>・WebUI の使いやすさ | pfSense, VyOS, OpenWrt             |
-| **TrueNAS SCALE** | ・ZFS の信頼性<br>・レプリケーション機能<br>・NFS/SMB 統合管理<br>・WebUI                   |  FreeNAS Core       |
-| **VXLAN**         | ・VLAN対応スイッチ不要<br>・既存ネットワーク上に構築可<br>・柔軟なセグメント設計            | 物理VLAN, Wireguard メッシュ       |
-| **Caddy**         | ・自動TLS更新<br>・Caddyfile のシンプルさ<br>・DNS-01チャレンジ対応                         | Nginx, Traefik, HAProxy            |
-| **Ansible**       | ・エージェントレス<br>・冪等性の保証<br>・YAML の可読性<br>・学習コスト低                   | Terraform            |
-| **Step-CA**       | ・プライベートCA<br>・ACME対応<br>・軽量（コンテナで動作）                                  | 自己署名証明書, Let's Encrypt のみ |
+自宅環境の制約（VLAN対応スイッチなし、既存ネットワーク活用）と学習目的を考慮し、**オープンソース・HA対応・WebUI充実**を基準に選定。
+
+→ [技術選定の詳細を見る](/details/infrastructure.html)
 
 ---
 
 # ⚙️ 自動化（Ansible + Cloud-init）
 
-現在、自宅環境のコード化（IaC）を進めています。  
-**Cloud-init でVM初期構築 → Ansible で設定自動化**のワークフローを確立。
-
-### 実装内容
-
-- **Ubuntu VM テンプレート作成**（Cloud-init）  
-- **Ansible Playbook による自動デプロイ**  
-  - OS初期設定（タイムゾーン / ロケール / パッケージ更新）  
-  - Docker CE インストール  
-  - Immich 自動デプロイ（docker-compose.yml / .env 配置）  
-  - NFS マウント設定（/etc/fstab 管理）  
-  - systemd サービス登録
-
-### 成果
-
-- VM構築時間を **手動1時間 → 自動10分** に短縮  
-- 再現性の確保（何度でも同じ状態に復元可能）  
-- ドキュメントのコード化（手順書が実行可能に）
+**Cloud-init + Ansible** によるVM自動構築を実現。構築時間を **手動1時間 → 自動10分** に短縮、再現性を確保。
 
 ➡️ GitHub リポジトリ: <https://github.com/yusuke-524/ansible-immich>
 
-→ [ドキュメント管理・学習方法の詳細を見る](/details/services.html)
-
 ---
 
-# 💻️ 開発プロジェクト：Yomicord
-
-療養期間中の技術学習の一環として、**Discord音声読み上げBot**を設計・開発中です。  
-インフラ運用で培った「運用を見据えた設計」の考え方を、アプリケーション開発に応用しています。
-
-**プロジェクト概要**
-- Discord のチャットを音声で読み上げる Bot（WebUI対応も想定）
-- TypeScript / Node.js によるモダンな monorepo 構成（pnpm workspace）
-- **開発状況**: 設計・初期実装フェーズ
-
-### 設計の特徴
-
-- **Single Writer パターン**: DB読み書きはAPIのみ、整合性・監査を集約
-- **Contracts First**: Zod schemaで型安全性を確保、API入出力を厳密に定義
-- **責務分離**: 監査ログ自動記録、認可はAPI側で判定、永続化方式に依存しない境界設計
-- **ADR（Architecture Decision Records）**: 設計判断を5件文書化
-
-### 技術スタック
-
-TypeScript, Node.js, Fastify, Zod, discord.js, pnpm, Vitest
-
-### AI活用とガードレール
-
-GitHub Copilot と OpenAI Codex を全面活用しつつ、**品質・安全性を担保するガードレール体制**を構築：
-
-- 二層のルール体制（文書レベル + 10種類のスキル定義）
-- DB境界・契約ファーストの自動検証
-- 実装前の計画提示、実装中の差分管理、実装後のレビュー・ADR記録
-- プロンプトの永続化（devcontainerバインドマウント、スキルベース管理）
-
-**2026年時点での差別化**: 「AIを使える」ではなく**「品質を保ちながら制御して使える」**ことを重視。  
-ガードレールによる多層防御で、AI支援下でも安全性・一貫性・追跡可能性を維持。
-
-➡️ GitHub リポジトリ: <https://github.com/Hakuya5247/yomicord>  
-➡️ プロジェクト詳細: [Yomicord開発プロジェクト](/details/yomicord.html)
-
----
-
-# �🚀 今後の学習・キャリア方向
+# 🚀 今後の学習・キャリア方向
 
 ### ✔ インフラエンジニア
 - Kubernetes / Helm（自宅クラスタでの検証予定）  
