@@ -21,6 +21,7 @@
       --table-alt: #e7f1ea;
       --nav-bg: #155799;
       --nav-hover: rgba(255,255,255,0.2);
+      --link-color: #155799;
     }
 
     * { box-sizing: border-box; }
@@ -87,11 +88,12 @@
     }
 
     :where(.markdown-body, .main-content) a {
-      color: inherit;
+      color: var(--link-color) !important;
       text-decoration: underline;
       text-underline-offset: 0.15em;
     }
     :where(.markdown-body, .main-content) a:hover {
+      color: var(--link-color) !important;
       text-decoration-thickness: 0.14em;
     }
 
@@ -105,7 +107,6 @@
 
     :where(.markdown-body, .main-content) pre,
     :where(.markdown-body, .main-content) .highlight,
-    :where(.markdown-body, .main-content) pre code,
     :where(.markdown-body, .main-content) .highlighter-rouge,
     :where(.markdown-body, .main-content) .highlight pre {
       background-color: var(--code-bg) !important;
