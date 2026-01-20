@@ -1,3 +1,10 @@
 title: "Home Lab & Portfolio"
 description: "Engineer Portfolio"
 theme: jekyll-theme-cayman
+
+defaults:
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "default"
