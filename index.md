@@ -205,94 +205,6 @@ OS / ネットワーク / ストレージ / セキュリティ / 監視 / 自動
 
 ---
 
-# 💻 開発プロジェクト：Yomicord
-
-療養期間中の技術学習の一環として、**Discord音声読み上げBot**を設計・開発中です。  
-インフラ運用で培った「運用を見据えた設計」の考え方を、アプリケーション開発に応用しています。
-
-**プロジェクト概要**
-- Discord のチャットを音声で読み上げる Bot
-- 将来的に WebUI からも設定・辞書管理が可能な設計
-- TypeScript / Node.js によるモダンな monorepo 構成
-- **開発状況**: 設計・初期実装フェーズ
-
-```
-┌─────────────────────────────────────────┐
-│ Yomicord Architecture                   │
-│ ├─ apps/bot (Discord.js)                │
-│ ├─ apps/api (Fastify REST API)          │
-│ ├─ packages/contracts (Zod schemas)     │
-│ └─ packages/storage (JSON/DB抽象化)     │
-└─────────────────────────────────────────┘
-```
-
-### 設計の特徴
-
-**1. 単一更新窓口（Single Writer）**
-- DB への読み書きは API のみが行う
-- Bot / WebUI は API 経由でのみ設定・辞書を操作
-- 整合性・監査・認可を API に集約
-
-**2. 契約ファースト（Contracts First）**
-- API 入出力は Zod schema で厳密に定義
-- packages/contracts を唯一の真実（Source of Truth）とする
-- 型安全性を最優先
-
-**3. 運用を見据えた責務分離**
-- 監査ログの自動記録（全更新操作で before/after を保持）
-- 認可は API 側で必ず判定（クライアント側推測に依存しない）
-- 永続化方式に依存しない Store 境界を定義（DB 移行を見据える）
-
-### 技術スタック
-
-| 技術           | 用途                        | 選定理由                                        |
-| -------------- | --------------------------- | ----------------------------------------------- |
-| **TypeScript** | 全体の実装言語              | 型安全性・IDE 支援・保守性                      |
-| **Fastify**    | Backend API フレームワーク  | 高速・型安全なルーティング                      |
-| **Zod**        | Schema validation           | TypeScript 型との親和性・厳密な検証             |
-| **discord.js** | Discord Bot SDK             | 最も標準的で安定したライブラリ                  |
-| **pnpm**       | monorepo パッケージ管理     | 高速・workspace サポート・ディスク効率          |
-| **Vitest**     | テストフレームワーク        | Vite エコシステム・高速・TypeScript ネイティブ |
-
-### AI活用とガードレール
-
-開発効率化のため **GitHub Copilot** と **OpenAI Codex** を全面活用しつつ、  
-**品質・安全性を担保するガードレール体制**を構築しています。
-
-- **二層のルール体制**
-  - 文書レベル: AGENTS.md（運用ルール全般）+ .github/copilot-instructions.md
-  - スキルレベル: 10種類のCodexスキル定義（強制ルール）
-- **自動検証の仕組み**
-  - repo-guardrails skill: DB境界違反・依頼範囲外変更の検知
-  - contract-first-api-change skill: API変更の標準手順強制
-  - safe-command-policy skill: 破壊的操作の事前確認必須
-- **品質管理フロー**
-  - 実装前: 計画提示・確認質問（期待入出力・失敗時の扱い・互換性）
-  - 実装中: 差分管理・範囲制約・自動検証
-  - 実装後: レビュー・ADR記録
-- **プロンプトの永続化**
-  - devcontainer のバインドマウント活用（~/.codex）
-  - スキルベースの知識管理（.codex/skills/配下に構造化）
-
-**この取り組みの意義**: 2026年時点でのAI活用において重要なのは「使える」ことではなく、  
-**「品質を保ちながら制御して使える」**ことです。ガードレールによる多層防御で、  
-AI支援下でも安全性・一貫性・追跡可能性を維持しています。
-
-### アーキテクチャ判断記録（ADR）
-
-重要な設計判断は ADR（Architecture Decision Records）として文書化しています：
-
-- **ADR-0001**: GuildSettings API の設計（GET/PUT 全置換方式）
-- **ADR-0002**: GuildMemberSettings API（3操作：GET/PUT/DELETE）
-- **ADR-0003**: DictionaryEntry API（CRUD + pagination/cursor）
-- **ADR-0004**: SettingsAuditLog API（読み取り専用）
-- **ADR-0005**: 監査ログの保存戦略（同期追記・変更ごとに1ログ）
-
-➡️ GitHub リポジトリ: <https://github.com/Hakuya5247/yomicord>  
-➡️ プロジェクト詳細: [Yomicord開発プロジェクト](/details/yomicord.html)
-
----
-
 # 🎯 技術選定の理由
 
 | 技術              | 採用理由                                                                                    | 検討した代替案                     |
@@ -334,7 +246,45 @@ AI支援下でも安全性・一貫性・追跡可能性を維持しています
 
 ---
 
-# 🚀 今後の学習・キャリア方向
+# 💻️ 開発プロジェクト：Yomicord
+
+療養期間中の技術学習の一環として、**Discord音声読み上げBot**を設計・開発中です。  
+インフラ運用で培った「運用を見据えた設計」の考え方を、アプリケーション開発に応用しています。
+
+**プロジェクト概要**
+- Discord のチャットを音声で読み上げる Bot（WebUI対応も想定）
+- TypeScript / Node.js によるモダンな monorepo 構成（pnpm workspace）
+- **開発状況**: 設計・初期実装フェーズ
+
+### 設計の特徴
+
+- **Single Writer パターン**: DB読み書きはAPIのみ、整合性・監査を集約
+- **Contracts First**: Zod schemaで型安全性を確保、API入出力を厳密に定義
+- **責務分離**: 監査ログ自動記録、認可はAPI側で判定、永続化方式に依存しない境界設計
+- **ADR（Architecture Decision Records）**: 設計判断を5件文書化
+
+### 技術スタック
+
+TypeScript, Node.js, Fastify, Zod, discord.js, pnpm, Vitest
+
+### AI活用とガードレール
+
+GitHub Copilot と OpenAI Codex を全面活用しつつ、**品質・安全性を担保するガードレール体制**を構築：
+
+- 二層のルール体制（文書レベル + 10種類のスキル定義）
+- DB境界・契約ファーストの自動検証
+- 実装前の計画提示、実装中の差分管理、実装後のレビュー・ADR記録
+- プロンプトの永続化（devcontainerバインドマウント、スキルベース管理）
+
+**2026年時点での差別化**: 「AIを使える」ではなく**「品質を保ちながら制御して使える」**ことを重視。  
+ガードレールによる多層防御で、AI支援下でも安全性・一貫性・追跡可能性を維持。
+
+➡️ GitHub リポジトリ: <https://github.com/Hakuya5247/yomicord>  
+➡️ プロジェクト詳細: [Yomicord開発プロジェクト](/details/yomicord.html)
+
+---
+
+# �🚀 今後の学習・キャリア方向
 
 ### ✔ インフラエンジニア
 - Kubernetes / Helm（自宅クラスタでの検証予定）  
