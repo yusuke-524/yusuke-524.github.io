@@ -91,7 +91,7 @@
       text-decoration-thickness: 0.14em;
     }
     .markdown-body code {
-      background: #f5f5f5;
+      background: #f5f5f5 !important;
       color: #333333;
       padding: 0.1em 0.3em;
       border-radius: 4px;
@@ -100,7 +100,7 @@
     .markdown-body pre,
     .markdown-body .highlight,
     .markdown-body pre code {
-      background: #f5f5f5;
+      background: #f5f5f5 !important;
       color: #333333;
       border: 1px solid #e6e6e6;
     }
@@ -120,7 +120,7 @@
     .markdown-body table {
       border-collapse: collapse;
       border-spacing: 0;
-      background: #fff;
+      background: #ffffff !important;
     }
     .markdown-body th,
     .markdown-body td {
@@ -129,11 +129,14 @@
       color: #333333;
     }
     .markdown-body thead th {
-      background: #ffffff;
+      background: #ffffff !important;
       font-weight: 600;
     }
+    .markdown-body tbody tr {
+      background: #ffffff !important;
+    }
     .markdown-body tbody tr:nth-child(2n) {
-      background: #e7f1ea;
+      background: #e7f1ea !important;
     }
     @media (max-width: 600px) {
       .page-header h1 { font-size: 1.5rem; }
