@@ -13,7 +13,7 @@ title: サービス・ドキュメント詳細
 
 | サービス      | 概要             | 技術ポイント                                 | 配置           |
 | ------------- | ---------------- | -------------------------------------------- | -------------- |
-| **OPNsense**  | ルーター         | CARP/pfSync HA / VXLAN統合                   | pvecore + pve1 |
+| **OPNsense**  | ルーター         | CARP/pfSync HA / VXLAN統合 / Wireguard       | pvecore + pve1 |
 | **TrueNAS**   | NAS              | ZFS / レプリケーション / NFS                 | pvecore        |
 | **Step-CA**   | プライベートCA   | ACME / HTTP-01                               | CT(manage)     |
 | **Caddy**     | Reverse Proxy    | DNS-01 / Let's Encrypt / Cloudflare API      | CT(service)    |
@@ -49,7 +49,9 @@ docs-internal/
 │ │ ├── Nextcloud.md
 │ │ └── Forgejo.md
 │ └── ...
-└── cloud-init.md
+└─自動化/
+  ├ cloud-init.md
+  └ Ansible-immich.md
 ```
 
 ### 設定ファイル管理（Forgejo / Git）

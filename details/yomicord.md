@@ -107,7 +107,7 @@ yomicord/ (monorepo - pnpm workspace)
 ### 基本方針: 制御されたAI活用
 
 開発効率化のため **GitHub Copilot** と **OpenAI Codex** を全面活用しています。  
-ただし、**品質・安全性・整合性を担保するガードレール体制**を構築し、  
+ただし、品質・安全性・整合性を担保するガードレール体制を構築し、  
 闇雲なAI依存ではなく、エンジニアが制御する形での活用を徹底しています。
 
 ### 二層のガードレール体制
@@ -228,11 +228,11 @@ yomicord/ (monorepo - pnpm workspace)
 
 | ADR | タイトル | 概要 |
 | --- | --- | --- |
-| **0001** | GuildSettings API の設計 | GET/PUT全置換方式、Actor情報をカスタムヘッダーで受信 |
-| **0002** | GuildMemberSettings API | GET/PUT/DELETE、本人のみ操作可、空なら自動削除 |
-| **0003** | DictionaryEntry API | CRUD + cursor方式pagination、重複surfaceKeyはエラー |
-| **0004** | SettingsAuditLog API | 読み取り専用、API内部で自動記録（改ざん防止） |
-| **0005** | 監査ログの保存戦略 | 同期追記、変更ごとに1ログ、整合性を優先 |
+| 0001 | GuildSettings API の設計 | GET/PUT全置換方式、Actor情報をカスタムヘッダーで受信 |
+| 0002 | GuildMemberSettings API | GET/PUT/DELETE、本人のみ操作可、空なら自動削除 |
+| 0003 | DictionaryEntry API | CRUD + cursor方式pagination、重複surfaceKeyはエラー |
+| 0004 | SettingsAuditLog API | 読み取り専用、API内部で自動記録（改ざん防止） |
+| 0005 | 監査ログの保存戦略 | 同期追記、変更ごとに1ログ、整合性を優先 |
 
 **各ADRの詳細**: Context / Decision / Consequences / Alternatives の構成で記録  
 ➡️ [GitHubリポジトリ](https://github.com/Hakuya5247/yomicord/tree/main/docs/adr)で全文を確認できます
